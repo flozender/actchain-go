@@ -102,7 +102,7 @@ func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Respo
 	for i < len(maint) {
 		fmt.Println("i is ", i)
 		MaintenanceAsBytes, _ := json.Marshal(maint[i])
-		APIstub.PutState("Maintenance"+strconv.Itoa(i), MaintenanceAsBytes)
+		APIstub.PutState("MTN"+strconv.Itoa(i), MaintenanceAsBytes)
 		fmt.Println("Added", maint[i])
 		i = i + 1
 	}
