@@ -112,7 +112,7 @@ func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Respo
 
 func (s *SmartContract) createMaintenance(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
-	if len(args) !=  {
+	if len(args) != 11 {
 		return shim.Error("Incorrect number of arguments. Expecting 11")
 	}
 
