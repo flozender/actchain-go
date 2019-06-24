@@ -21,7 +21,6 @@ type Maintenance struct{
 	PID string `json:"pid"`
 	Equip_rq string `json:"equip_rq"`
 	Staff_rq string `json:"staff_rq"`
-	Staff_av string `json:"staff_av"`
 	Staff_out string `json:"staff_out"`
 	Equip_out string `json:"equip_out"`
 	Cost string `json:"cost"`
@@ -93,9 +92,9 @@ func (s *SmartContract) queryAllMaintenance(APIstub shim.ChaincodeStubInterface,
 
 func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Response {
 	maint := []Maintenance{
-		Maintenance{Name: "Gas Leak", Date: "12-01-19", PID: "PLN1249", Equip_rq: "1,4", Staff_rq: "6", Staff_av: "2", Staff_out: "1,2,1", Equip_out: "1,4", Cost: "99280", Inspec: "False"},
-		Maintenance{Name: "Pipe Repairs", Date: "23-03-19", PID: "PLN4214", Equip_rq: "2,3", Staff_rq: "8", Staff_av: "7", Staff_out: "1", Equip_out: "2,3", Cost: "82442", Inspec: "True"},
-		Maintenance{Name: "Regular Check Up", Date: "18-04-19", PID: "PLN2502", Equip_rq: "3,4", Staff_rq: "1", Staff_av: "1", Staff_out: "0", Equip_out: "0", Cost: "15000", Inspec: "True"},
+		Maintenance{Name: "Gas Leak", Date: "12-01-19", PID: "PLN1249", Equip_rq: "1,4", Staff_rq: "6",  Staff_out: "1,2,1", Equip_out: "1,4", Cost: "99280", Inspec: "False"},
+		Maintenance{Name: "Pipe Repairs", Date: "23-03-19", PID: "PLN4214", Equip_rq: "2,3", Staff_rq: "8",  Staff_out: "1", Equip_out: "2,3", Cost: "82442", Inspec: "True"},
+		Maintenance{Name: "Regular Check Up", Date: "18-04-19", PID: "PLN2502", Equip_rq: "3,4", Staff_rq: "1",  Staff_out: "0", Equip_out: "0", Cost: "15000", Inspec: "True"},
 	}
 
 	i := 0
@@ -112,11 +111,11 @@ func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Respo
 
 func (s *SmartContract) createMaintenance(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
-	if len(args) != 11 {
-		return shim.Error("Incorrect number of arguments. Expecting 11")
+	if len(args) != 10  {
+		return shim.Error("Incorrect number of arguments. Expecting 10")
 	}
 
-	var maint = Maintenance{Name: args[1], Date: args[2], PID: args[3], Equip_rq: args[4], Staff_rq: args[5], Staff_av: args[6], Staff_out: args[7], Equip_out: args[8], Cost: args[9], Inspec: args[10]}
+	var maint = Maintenance{Name: args[1], Date: args[2], PID: args[3], Equip_rq: args[4], Staff_rq: args[5], Staff_out: args[6], Equip_out: args[7], Cost: args[8], Inspec: args[9]}
 
 	maintAsBytes, _ := json.Marshal(maint)
 	APIstub.PutState(args[0], maintAsBytes)
